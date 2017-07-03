@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PauseView">
+        <attr name="pauseview_play_src" format="reference"/>
+        <attr name="pauseview_stop_src" format="reference"/>
+        <attr name="pauseview_progress_color" format="color"/>
+        <attr name="pauseview_progress_width" format="dimension"/>
+        <attr name="pauseview_bg_color" format="color"/>
+        <attr name="pauseview_mapbg_color" format="color"/>
+    </declare-styleable>
+</resources>

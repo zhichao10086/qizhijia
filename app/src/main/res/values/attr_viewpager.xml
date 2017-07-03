@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <attr name="visible_tab_conut" format="integer"/>
+    <declare-styleable name="ViewpagerIndicator">
+        <attr name="visible_tab_conut"/>
+    </declare-styleable>
+</resources>

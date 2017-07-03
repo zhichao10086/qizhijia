@@ -1,0 +1,200 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@null</item>
+    </style>
+
+
+
+    <!-- 字体颜色：白色 字体大小：12 -->
+    <style name="white_12">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <!-- 字体颜色：白色 字体大小：14 -->
+    <style name="white_14">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- 字体颜色：白色 字体大小：16 -->
+    <style name="white_16">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <!-- 字体颜色：白色 字体大小：18 -->
+    <style name="white_18">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <!-- 字体颜色：白色 字体大小：24 -->
+    <style name="white_24">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <!-- 字体颜色：黑色 字体大小：14 -->
+    <style name="black_14">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- 字体颜色：黑色 字体大小：16 -->
+    <style name="black_16">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <!-- 字体颜色：黑色 字体大小：18 -->
+    <style name="black_18">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <!-- 字体颜色：黑色 字体大小：20 -->
+    <style name="black_20">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <!-- 字体颜色：黑色 字体大小：24 -->
+    <style name="black_24">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <!-- 字体颜色：#AAAAAA 字体大小：12 -->
+    <style name="AA_12">
+        <item name="android:textColor">#AAAAAA</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+    <!-- 字体颜色：#AAAAAA 字体大小：14 -->
+    <style name="AA_14">
+        <item name="android:textColor">#AAAAAA</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- 字体颜色：#AAAAAA 字体大小：16 -->
+    <style name="AA_16">
+        <item name="android:textColor">#AAAAAA</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <!-- 字体颜色：#AAAAAA 字体大小：18 -->
+    <style name="AA_18">
+        <item name="android:textColor">#AAAAAA</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <!-- 字体颜色：#AAAAAA 字体大小：20 -->
+    <style name="AA_20">
+        <item name="android:textColor">#AAAAAA</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <!-- 字体颜色：红色 字体大小：30 -->
+    <style name="red_30">
+        <item name="android:textColor">@color/current_color</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+    <!-- 字体颜色：红色 字体大小：14 -->
+    <style name="red_14">
+        <item name="android:textColor">@color/current_color</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- 字体颜色：#CCCCCC 字体大小：14 -->
+    <style name="CC_14">
+        <item name="android:textColor">#CCCCCC</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- 字体颜色：#8c8c8c 字体大小：14 -->
+    <style name="c8_14">
+        <item name="android:textColor">#8c8c8c</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- 字体颜色：#646464 字体大小：16 -->
+    <style name="gray_16">
+        <item name="android:textColor">#646464</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <!-- 字体颜色：#BFBFBF 字体大小：12 -->
+    <style name="BF_12">
+        <item name="android:textColor">#BFBFBF</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <!-- 弹窗样式 -->
+    <style name="common_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+    <!-- 登录界面checkbox -->
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/btn_checkbox_selector</item>
+    </style>
+
+    <style name="tab_rb_style">
+        <item name="android:layout_width" >0dp</item>
+        <item name="android:layout_height" >wrap_content</item>
+        <item name="android:layout_weight" >1</item>
+        <item name="android:button" >@null</item>
+        <item name="android:textColor" >@color/tab_selector_tv_color</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity" >center_horizontal|bottom</item>
+        <item name="android:layout_gravity" >bottom</item>
+        <item name="android:background" >@null</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="tab_favorite_style">
+        <item name="android:layout_width" >0dp</item>
+        <item name="android:layout_height" >fill_parent</item>
+        <item name="android:layout_weight" >1</item>
+        <item name="android:button" >@null</item>
+        <item name="android:textColor" >@color/tab_selector_tv_color</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity" >center</item>
+    </style>
+
+    <style name="description_title_txt">
+        <item name="android:textColor">#808080</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+    <style name="description_txt">
+        <item name="android:textColor">#808080</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+
+    <style name="window_style" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/window_dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/window_dialog_exit</item>
+    </style>
+
+</resources>
