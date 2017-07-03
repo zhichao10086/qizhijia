@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/common_title"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#c6c6c6"/>
+
+        <FrameLayout
+            android:id="@+id/tab_content"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:background="#77557799" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#c6c6c6"/>
+
+        <RadioGroup
+            android:id="@+id/tabs_rg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="#ffffff">
+
+            <RadioButton
+                android:id="@+id/tab_rb_a"
+                style="@style/tab_rb_style"
+                android:checked="true"
+                android:drawableTop="@drawable/tab_selector_home"
+                android:text="处方" />
+
+            <RadioButton
+                android:id="@+id/tab_rb_b"
+                style="@style/tab_rb_style"
+                android:drawableTop="@drawable/tab_selector_regist"
+                android:text="评估" />
+
+            <RadioButton
+                android:id="@+id/tab_rb_d"
+                style="@style/tab_rb_style"
+                android:drawableTop="@drawable/tab_selector_search"
+                android:text="发现" />
+
+            <RadioButton
+                android:id="@+id/tab_rb_e"
+                style="@style/tab_rb_style"
+                android:drawableTop="@drawable/tab_selector_wo"
+                android:text="我的" />
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>
