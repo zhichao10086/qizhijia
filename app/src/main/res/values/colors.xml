@@ -4,8 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="red">#FF0000</color>
+    <color name="title_user">#CF102D</color>
 
-    <color name="title_color_bg">#3CD6C2</color>
+    <color name="title_color_bg">#212322</color>
     <color name="textcolor">#35aa4e</color>
 
     <color name="word51">#515151</color>
@@ -38,14 +39,14 @@
     <color name="pop_half_bg_color">#80000000</color>
 
     <color name="hint_foreground_dark">#808080</color>
-    <color name="tab_pressed_color">#3CD6C2</color>
+    <color name="tab_pressed_color">#CF102D</color>
 
     <!-- 上拉下拉刷新文字颜色 -->
     <color name="refresh_tip_color">#646464</color>
     <color name="refresh_time_color">#afafaf</color>
 
-    <color name="white_color">#ffffffff</color>
 
+    <color name="color_bg">#DAD9D7</color>
 
     <!-- 浅灰色 -->
     <color name="color_A">#888888</color>
@@ -72,4 +73,8 @@
     <color name="gray_light">#EDEDED</color>
     <color name="symptoms_self_diagnostics_tab_dark_text">#444444</color>
     <color name="topbar_bg">#770044</color>
+
+
+    <color name="bg_list_pressed_true">#FFFFFF</color>
+    <color name="bg_list_pressed_fasle">#DAD9D7</color>
 </resources>

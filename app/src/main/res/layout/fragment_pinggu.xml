@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <com.wuzhichao.test1.mvp.view.CircleImageView
+            android:id="@+id/img_photo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/logo" >
+        </com.wuzhichao.test1.mvp.view.CircleImageView>
+        <LinearLayout
+            android:layout_marginBottom="80dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+            <Button
+                android:id="@+id/btn_pinggu"
+                style="@style/white_18"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_login_selector"
+                android:text="体态评估" />
+            <Button
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:id="@+id/btn_zice"
+                style="@style/white_18"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn_login_selector"
+                android:text="个人自测" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

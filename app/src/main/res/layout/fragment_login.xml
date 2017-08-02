@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg">
+
+    <LinearLayout
+        android:id="@+id/layout_login"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="vertical"
+        android:background="@drawable/yuanjiao_login">
+
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/login_username"
+            android:layout_weight="1"
+            android:background="@null"/>
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="textPassword"
+            android:hint="@string/login_password"
+            android:layout_weight="1"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_login_register"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/layout_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_login"
+            android:text="@string/login"
+            android:textSize="20sp"
+            android:background="@drawable/btn_login_selector"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:id="@+id/btn_register"
+            android:text="@string/register"
+            android:textSize="20sp"
+            android:background="@drawable/btn_login_selector"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_login_register"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="60dp"
+            android:layout_height="0.5dp"
+            android:background="#000"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用其他方式登录"/>
+        <View
+            android:layout_width="60dp"
+            android:layout_height="0.5dp"
+            android:background="#000"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_other_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/btn_qq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_qqlogin_selector"
+            android:layout_marginLeft="50dp"/>
+        <Button
+            android:id="@+id/btn_weixin"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_weixinlogin_selector"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/btn_weibo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_weibologin_selector"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

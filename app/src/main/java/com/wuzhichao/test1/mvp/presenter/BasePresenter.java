@@ -9,7 +9,8 @@ package com.wuzhichao.test1.mvp.presenter;
  * @author Lemon
  * @use Activity或Fragment implements BasePresenter
  */
-public interface BasePresenter {
+public interface  BasePresenter {
 
+    public void start();
 
 }

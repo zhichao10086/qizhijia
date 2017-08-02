@@ -5,6 +5,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- 标题高 -->
     <dimen name="title_height">42dp</dimen>
+
+    <dimen name="viewpagerIndicator_height">45dp</dimen>
     
     <!-- pull to refresh -->
     <dimen name="indicator_right_padding">10dp</dimen>
@@ -22,5 +24,13 @@
     <dimen name="middle_margin">24dp</dimen>
     <dimen name="largeer_margin">48dp</dimen>
 
+    <dimen name="user_listitem_height">30dp</dimen>
+    <dimen name="user_body_data_left_margin">15dp</dimen>
+
+    <dimen name="user_item_view_height">3dp</dimen>
+    <dimen name="user_item_view_marginTop">10dp</dimen>
+    <dimen name="user_item_layout_padding">5dp</dimen>
+
+    <dimen name="chufang_indicator_height">25dp</dimen>
 
 </resources>

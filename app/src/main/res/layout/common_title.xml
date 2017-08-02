@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
 	android:id="@+id/layout_title"
     android:layout_height="@dimen/title_height"
-	android:background="@color/title_color_bg" >
+	android:background="@color/title_user">
 	<RelativeLayout
 		android:id="@+id/rly_left_back"
 		android:layout_width="90dp"
@@ -30,7 +30,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_centerInParent="true"
 	        style="@style/white_18"
-	        android:text="视频"/>
+	        android:text="@string/tvBaseTitle"/>
 	<RelativeLayout
 		android:id="@+id/rly_right"
 		android:layout_width="90dp"

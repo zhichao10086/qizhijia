@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/common_title"/>
+    <include layout="@layout/common_title" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -35,26 +36,26 @@
             android:background="#ffffff">
 
             <RadioButton
-                android:id="@+id/tab_rb_a"
+                android:id="@+id/tab_rb_chufang"
                 style="@style/tab_rb_style"
                 android:checked="true"
                 android:drawableTop="@drawable/tab_selector_home"
                 android:text="处方" />
 
             <RadioButton
-                android:id="@+id/tab_rb_b"
+                android:id="@+id/tab_rb_pinggu"
                 style="@style/tab_rb_style"
                 android:drawableTop="@drawable/tab_selector_regist"
                 android:text="评估" />
 
             <RadioButton
-                android:id="@+id/tab_rb_d"
+                android:id="@+id/tab_rb_faxian"
                 style="@style/tab_rb_style"
                 android:drawableTop="@drawable/tab_selector_search"
                 android:text="发现" />
 
             <RadioButton
-                android:id="@+id/tab_rb_e"
+                android:id="@+id/tab_rb_mine"
                 style="@style/tab_rb_style"
                 android:drawableTop="@drawable/tab_selector_wo"
                 android:text="我的" />

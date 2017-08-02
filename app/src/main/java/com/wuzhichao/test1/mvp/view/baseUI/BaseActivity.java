@@ -6,12 +6,13 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
@@ -19,20 +20,22 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.wuzhichao.test1.MyApp;
 import com.wuzhichao.test1.R;
-import com.wuzhichao.test1.manager.SystemBarTintManager;
-import com.wuzhichao.test1.manager.ThreadManager;
+import com.wuzhichao.test1.dragger.components.ActivityComponent;
+import com.wuzhichao.test1.dragger.components.DaggerActivityComponent;
+import com.wuzhichao.test1.dragger.modules.ActivityModule;
+import com.wuzhichao.test1.dragger.qualifier.ActivityContext;
 import com.wuzhichao.test1.mvp.listener.OnBottomDragListener;
-import com.wuzhichao.test1.mvp.presenter.ActivityPresenter;
-
 import com.wuzhichao.test1.util.StringUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.xutils.ViewInjector;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import static com.wuzhichao.test1.config.Constant.ACTION_EXIT_APP;
 
@@ -55,14 +58,24 @@ import static com.wuzhichao.test1.config.Constant.ACTION_EXIT_APP;
  * @see #onDestroy
  * @use extends BaseActivity, 具体参考 .DemoActivity 和 .DemoFragmentActivity
  */
-public abstract class BaseActivity extends FragmentActivity  implements GestureDetector.OnGestureListener {
+public abstract class BaseActivity extends FragmentActivity implements GestureDetector.OnGestureListener {
     private static final String TAG = "BaseActivity";
+
+
+    protected ActivityComponent mActivityComponent;
 
     /**
      * 该Activity实例，命名为context是因为大部分方法都只需要context，写成context使用更方便
      * @warn 不能在子类中创建
      */
-    protected BaseActivity context = null;
+    @Inject
+    @ActivityContext
+    public Context mContext;
+
+    @Inject
+    public ViewInjector mViewInjector;
+
+
     /**
      * 该Activity的界面，即contentView
      * @warn 不能在子类中创建
@@ -77,24 +90,45 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
      * Fragment管理器
      * @warn 不能在子类中创建
      */
-    protected FragmentManager fragmentManager = null;
+    @Inject
+    @Named("ActivityFragmentManager")
+    public FragmentManager mFragmentManager;
+
+    protected FragmentTransaction mFragmentTransaction;
 
     private boolean isAlive = false;
     private boolean isRunning = false;
+
+    //标题栏
+    public TextView tv_title;//标题
+    public Button btn_left;//左边按钮
+    public Button btn_right;//右边按钮
+    public View layout_title;
+
+    public View fl_content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        mActivityComponent = DaggerActivityComponent.builder()
+                .appComponent(((MyApp)getApplication()).getAppComponent())
+                .activityModule(new ActivityModule(this))
+                .build();
+        mActivityComponent.inject(this);
+
+        mViewInjector.inject(this);
+
+        Log.d(this.TAG,"activityComponent注入");
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         isAlive = true;
-        fragmentManager = getSupportFragmentManager();
+        //mFragmentManager = getSupportFragmentManager();
 
         inflater = getLayoutInflater();
 
-        threadNameList = new ArrayList<String>();
 
-        BaseBroadcastReceiver.register(context, receiver, ACTION_EXIT_APP);
+        BaseBroadcastReceiver.register(mContext, receiver, ACTION_EXIT_APP);
     }
 
     /**
@@ -110,6 +144,7 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
+        /*
         // 状态栏沉浸，4.4+生效 <<<<<<<<<<<<<<<<<
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(
@@ -122,6 +157,7 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
         // 状态栏沉浸，4.4+生效 >>>>>>>>>>>>>>>>>
 
         //tvBaseTitle = (TextView) findViewById(R.id.tvBaseTitle);//绑定默认标题TextView
+        */
     }
 
     //底部滑动实现同点击标题栏左右按钮效果<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -198,115 +234,23 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
      */
     protected ProgressDialog progressDialog = null;
 
-    /**展示加载进度条,无标题
-     * @param stringResId
-     */
-    public void showProgressDialog(int stringResId){
-        try {
-            showProgressDialog(null, context.getResources().getString(stringResId));
-        } catch (Exception e) {
-            Log.e(TAG, "showProgressDialog  showProgressDialog(null, context.getResources().getString(stringResId));");
-        }
-    }
-    /**展示加载进度条,无标题
-     * @param message
-     */
-    public void showProgressDialog(String message){
-        showProgressDialog(null, message);
-    }
-    /**展示加载进度条
-     * @param title 标题
-     * @param message 信息
-     */
-    public void showProgressDialog(final String title, final String message){
-        runUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog == null) {
-                    progressDialog = new ProgressDialog(context);
-                }
-                if(progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
-                if (StringUtil.isNotEmpty(title, false)) {
-                    progressDialog.setTitle(title);
-                }
-                if (StringUtil.isNotEmpty(message, false)) {
-                    progressDialog.setMessage(message);
-                }
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-            }
-        });
-    }
 
-
-    /**隐藏加载进度
-     */
-    public void dismissProgressDialog() {
-        runUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //把判断写在runOnUiThread外面导致有时dismiss无效，可能不同线程判断progressDialog.isShowing()结果不一致
-                if(progressDialog == null || progressDialog.isShowing() == false){
-                    Log.w(TAG, "dismissProgressDialog  progressDialog == null" +
-                            " || progressDialog.isShowing() == false >> return;");
-                    return;
-                }
-                progressDialog.dismiss();
-            }
-        });
-    }
-    //显示与关闭进度弹窗方法>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     //启动新Activity方法<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    /**打开新的Activity，向左滑入效果
+    /**打开新的Activity,不传数据
      * @param intent
      */
-    public void toActivity(Intent intent) {
-        toActivity(intent, true);
+    public void toAcvity(Intent intent) {
+        this.startActivity(intent);
     }
-    /**打开新的Activity
-     * @param intent
-     * @param showAnimation
-     */
-    public void toActivity(Intent intent, boolean showAnimation) {
-        toActivity(intent, -1, showAnimation);
-    }
-    /**打开新的Activity，向左滑入效果
+
+    /**打开新的Activity,带回传
      * @param intent
      * @param requestCode
      */
-    public void toActivity(Intent intent, int requestCode) {
-        toActivity(intent, requestCode, true);
-    }
-    /**打开新的Activity
-     * @param intent
-     * @param requestCode
-     * @param showAnimation
-     */
-    public void toActivity(final Intent intent, final int requestCode, final boolean showAnimation) {
-        runUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (intent == null) {
-                    Log.w(TAG, "toActivity  intent == null >> return;");
-                    return;
-                }
-                //fragment中使用context.startActivity会导致在fragment中不能正常接收onActivityResult
-                if (requestCode < 0) {
-                    startActivity(intent);
-                } else {
-                    startActivityForResult(intent, requestCode);
-                }
-                if (showAnimation) {
-                    overridePendingTransition(R.anim.right_push_in, R.anim.hold);
-                } else {
-                    overridePendingTransition(R.anim.null_anim, R.anim.null_anim);
-                }
-            }
-        });
+    public void toActivity(final Intent intent, final int requestCode) {
+        startActivityForResult(intent,requestCode);
     }
     //启动新Activity方法>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -317,7 +261,7 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
      */
     public void showShortToast(int stringResId) {
         try {
-            showShortToast(context.getResources().getString(stringResId));
+            showShortToast(mContext.getResources().getString(stringResId));
         } catch (Exception e) {
             Log.e(TAG, "showShortToast  context.getResources().getString(resId)" +
                     " >>  catch (Exception e) {" + e.getMessage());
@@ -334,83 +278,21 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
      * @param isForceDismissProgressDialog
      */
     public void showShortToast(final String string, final boolean isForceDismissProgressDialog) {
-        runUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (isForceDismissProgressDialog) {
-                    dismissProgressDialog();
-                }
-                Toast.makeText(context, "" + string, Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
     //show short toast 方法>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 
-    //运行线程 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-    /**在UI线程中运行，建议用这个方法代替runOnUiThread
-     * @param action
-     */
-    public final void runUiThread(Runnable action) {
-        if (isAlive() == false) {
-            Log.w(TAG, "runUiThread  isAlive() == false >> return;");
-            return;
-        }
-        runOnUiThread(action);
-    }
-    /**
-     * 线程名列表
-     */
-    protected List<String> threadNameList;
-    /**运行线程
-     * @param name
-     * @param runnable
-     * @return
-     */
-    public final Handler runThread(String name, Runnable runnable) {
-        if (isAlive() == false) {
-            Log.w(TAG, "runThread  isAlive() == false >> return null;");
-            return null;
-        }
-        name = StringUtil.getTrimedString(name);
-        Handler handler = ThreadManager.getInstance().runThread(name, runnable);
-        if (handler == null) {
-            Log.e(TAG, "runThread handler == null >> return null;");
-            return null;
-        }
-
-        if (threadNameList.contains(name) == false) {
-            threadNameList.add(name);
-        }
-        return handler;
-    }
-
-    //运行线程 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
 
     public final boolean isAlive() {
-        return isAlive && context != null;// & ! isFinishing();导致finish，onDestroy内runUiThread不可用
+        return isAlive && mContext != null;// & ! isFinishing();导致finish，onDestroy内runUiThread不可用
     }
 
     @Override
     public void finish() {
         super.finish();//必须写在最前才能显示自定义动画
-        runUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (enterAnim > 0 && exitAnim > 0) {
-                    try {
-                        overridePendingTransition(enterAnim, exitAnim);
-                    } catch (Exception e) {
-                        Log.e(TAG, "finish overridePendingTransition(enterAnim, exitAnim);" +
-                                " >> catch (Exception e) {  " + e.getMessage());
-                    }
-                }
-            }
-        });
+
     }
 
     @Override
@@ -435,9 +317,8 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
     @Override
     protected void onDestroy() {
         Log.d(TAG, "\n onDestroy <<<<<<<<<<<<<<<<<<<<<<<");
-        dismissProgressDialog();
-        BaseBroadcastReceiver.unregister(context, receiver);
-        ThreadManager.getInstance().destroyThread(threadNameList);
+        BaseBroadcastReceiver.unregister(mContext, receiver);
+
         if (view != null) {
             try {
                 view.destroyDrawingCache();
@@ -455,13 +336,9 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
         view = null;
         tvBaseTitle = null;
 
-        fragmentManager = null;
+        //fragmentManager = null;
         progressDialog = null;
-        threadNameList = null;
-
         intent = null;
-
-        context = null;
 
         Log.d(TAG, "onDestroy >>>>>>>>>>>>>>>>>>>>>>>>\n");
     }
@@ -575,7 +452,55 @@ public abstract class BaseActivity extends FragmentActivity  implements GestureD
         return super.dispatchTouchEvent(ev);
     }
 
+
+    public void setTitle(String title){
+        if(tv_title != null){
+            tv_title.setText(title);
+        }
+    }
+
+    public void setTitle(String title, Color color){
+        if(layout_title != null){
+            layout_title.setBackgroundColor(Color.parseColor(color.toString()));
+        }
+        if(tv_title != null){
+            tv_title.setText(title);
+        }
+
+    }
+
     //底部滑动实现同点击标题栏左右按钮效果>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+
+    public boolean isActive(){
+        return isRunning;
+    }
+
+
+
+    //Component的初始化<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public abstract void initComponent();
+
+
+    //Component的初始化>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //view的初始化<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public abstract void initView();
+
+
+    //view的初始化>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //listener的初始化<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public abstract void initListener();
+
+
+    //listener的初始化>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    public ActivityComponent getmActivityComponent(){
+        return mActivityComponent;
+    }
 
 }

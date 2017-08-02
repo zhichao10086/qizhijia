@@ -51,5 +51,19 @@ public class ResponseData<T> {
         return message;
     }
 
+    @Override
+    public String toString() {
 
+        String s = null;
+        for(int i = 0 ; i < data.size() ;i++){
+            s += data.get(i).toString();
+        }
+
+        return "ResponseData{" +
+                "errcode='" + errcode + '\'' +
+                ", data=" + s +
+                ", success=" + success +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
